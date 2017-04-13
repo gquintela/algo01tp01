@@ -1,0 +1,154 @@
+\documentclass[spanish,a4paper]{article} 
+
+\input{Algo1Macros}
+
+\begin{document}
+
+
+\materia{Algoritmos y Estructura de Datos I}
+\cuatrimestre{1}
+\anio{2017}
+
+\fecha{1 de Abril de 2017}
+
+\nombre{TPE - Sudoku}
+
+\titulotp
+
+El Sudoku es un juego matem\'atico que se public\'o por primera vez a finales de la d\'ecada de 1970 y se populariz\'o en Jap\'on en 1986, d\'andose a conocer en el \'ambito internacional en 2005 cuando numerosos peri\'odicos empezaron a publicarlo en su secci\'on de pasatiempos. 1 
+El objetivo del sudoku es rellenar una cuadrícula de $9 \times 9$ celdas (81 casillas) dividida en subcuadr\'iculas de $3 \times 3$ (también llamadas ``cajas'' o ``regiones'') con las cifras del 1 al 9 partiendo de algunos n\'umeros ya dispuestos en algunas de las celdas.
+
+\begin{center}
+	\includegraphics[scale=0.50]{img/sudoku}
+\end{center}
+
+Para poder considerar un tablero de Sudoku como \textbf{v\'alido} debe cumplir las siguientes condiciones:
+\begin{itemize}
+\item Ser una matriz de $9\times 9$
+\item Todos los elementos de la matriz son los d\'igitos entre $1$ y $9$, m\'as el valor $0$ que se interpreta como celda vac\'ia.
+\end{itemize}
+
+Decimos que un tablero de Sudoku est\'a \textbf{parcialmente resuelto} si cumple las siguientes condiciones:
+\begin{itemize}
+\item Es un tablero v\'alido
+\item Ninguna fila debe tener un d\'igito repetido entre $1$ y $9$ (el $0$ se ignora)
+\item Ninguna columna debe tener un d\'igito repetido entre $1$ y $9$ (el $0$ se ignora)
+\item Ninguna regi\'on debe tener un d\'igito repetido entre $1$ y $9$ (el $0$ se ignora)
+\end{itemize}
+
+Decimos que un tablero de Sudoku est\'a \textbf{totalmente resuelto} si cumple las siguientes condiciones
+\begin{itemize}
+\item Es un tablero parcialmente resuelto
+\item No hay ninguna celda vac\'ia (ninguna celda contiene el $0$)
+\end{itemize}
+
+
+Dado que el tablero de Sudoku se representa como una matriz cuadrada de $9 \times 9$ usando el tipo $\TLista{\TLista{\ent}}$, donde:
+\begin{itemize}
+\item Cada posici\'on de la secuencia de secuencias representa una fila de la matriz.
+\item Ejemplo:  $m[i][j]$ es el elemento en la \emph{i-\'esima} fila y la \emph{j-\'esima} columna de la matriz. 
+\end{itemize}
+ 
+Se desean especificar formalmente (i.e. indicar precondici\'on y postcondici\'on) de las siguientes operaciones:
+
+\begin{enumerate}
+
+\item \textbf{proc sudoku\_esTableroValido(in t: $\TLista{\TLista{\ent}}$, out result: $\bool$)}:
+\begin{itemize}
+\item Retorna \textbf{True} sii el tablero es un tablero v\'alido.
+\end{itemize}
+
+\item \textbf{proc sudoku\_esCeldaVacia(in t: $\TLista{\TLista{\ent}}$, in f: $\ent$, in c: $\ent$, out result: $\bool$)}:
+\begin{itemize}
+\item Dado un tablero $t$ v\'alido, $f$ es una fila v\'alida (entre 0 y 8) y $c$ es una columna v\'alida (entre 0 y 8)
+\item Retorna $true$ sii  la celda en la fila $f$ y la columna $c$ est\'a vac\'ia (contiene un $0$).
+\end{itemize}
+
+\item \textbf{proc sudoku\_nroDeCeldasVacias(in t: $\TLista{\TLista{\ent}}$, out result: $\ent$)}:
+\begin{itemize}
+\item Dado un tablero $t$ v\'alido, 
+\item retorna la cantidad de celdas vac\'ias (o el valor $0$ si el tablero est\'a totalmente resuelto).
+\end{itemize}
+
+\item \textbf{proc sudoku\_primeraCeldaVaciaFila(in t: $\TLista{\TLista{\ent}}$, out result: $\ent$)}:
+\begin{itemize}
+\item Dado un tablero $t$ v\'alido,  retorna la fila de la primera celda vac\'ia (o el valor $-1$ si no hay celdas vac\'ias).
+\item La \emph{primera} celda vac\'ia es aquella que cumple las siguiente condiciones:
+	\begin{itemize}
+	\item Su n\'umero de fila es menor o igual a todos los n\'umeros de filas de todas las celdas vac\'ias.
+	\item De todas las celdas con menor n\'umero de fila, su n\'umero de columna es menor o igual a todas las celdas libres en esa fila.
+	\end{itemize}  
+\end{itemize}
+
+\item \textbf{proc sudoku\_primeraCeldaVaciaColumna(in t: $\TLista{\TLista{\ent}}$, out result: $\ent$)}:
+\begin{itemize}
+\item Dado un tablero $t$ v\'alido, retorna la columna de la primera celda vac\'ia (o el valor $-1$ si no hay celdas vac\'ias).
+\item La \emph{primera} celda vac\'ia es aquella que cumple las siguiente condiciones:
+	\begin{itemize}
+	\item Su n\'umero de fila es menor o igual a todos los n\'umeros de filas de todas las celdas vac\'ias.
+	\item De todas las celdas con menor n\'umero de fila, su n\'umero de columna es menor o igual a todas las celdas libres en esa fila.
+	\end{itemize}  
+\end{itemize}
+
+\item \textbf{proc sudoku\_valorEnCelda(in t: $\TLista{\TLista{\ent}}$, in f: $\ent$, in c: $\ent$, out result: $\ent$)}:
+\begin{itemize}
+\item $t$ es un tablero v\'alido, $f$ es una fila v\'alida (entre 0 y 8) y $c$ es una columna v\'alida (entre 0 y 8)
+\item La celda en la fila $f$ y la columna $c$ no est\'a vac\'ia.
+\item Retorna el valor contenido en la fila $f$ y la columna $c$.
+\end{itemize}
+
+\item \textbf{proc sudoku\_llenarCelda(inout t: $\TLista{\TLista{\ent}}$, in f: $\ent$, in c: $\ent$, in value: $\ent$)}:
+\begin{itemize}
+\item $t$ es un tablero v\'alido, $f$ es una fila v\'alida (entre 0 y 8) y $c$ es una columna v\'alida (entre 0 y 8)
+\item La celda en la fila $f$ y la columna $c$ est\'a vac\'ia.
+\item $value$ es un valor entre $1$ y $9$
+\item Modifica el valor de la fila $f$ y la columna $c$ con el valor $value$.
+\end{itemize}
+
+\item \textbf{proc sudoku\_vaciarCelda(inout t: $\TLista{\TLista{\ent}}$, in f: $\ent$, in c: $\ent$)}:
+\begin{itemize}
+\item $t$ es un tablero v\'alido, $f$ es una fila v\'alida (entre 0 y 8) y $c$ es una columna v\'alida (entre 0 y 8)
+\item La celda en la fila $f$ y la columna $c$ \textbf{no}  est\'a vac\'ia.
+\item Elimina el valor que estaba contenido en la celda en la fila $f$ y la columna $c$.
+\end{itemize}
+
+
+
+\item \textbf{proc sudoku\_esTableroParcialmenteResuelto(in t: $\TLista{\TLista{\ent}}$, out result: $\bool$)}:
+\begin{itemize}
+\item Retorna \textbf{True} sii el tablero es un tablero parcialmente resuelto.
+\end{itemize}
+
+\item \textbf{proc sudoku\_esTableroTotalmenteResuelto(in t: $\TLista{\TLista{\ent}}$, out result: $\bool$)}: 
+\begin{itemize}
+\item Dado un tablero v\'alido retorna \textbf{True} sii el tablero est\'a totalmente resuelto
+\end{itemize}
+
+
+\item \textbf{proc sudoku\_esSubTablero(in t0,t1: $\TLista{\TLista{\ent}}$, out result: $\bool$)}:
+\begin{itemize}
+\item Dados $to$ y $t1$ dos tableros v\'alidos.
+\item Retorna \textbf{True} sii todas las celdas no vac\'ias del tablero $t0$ tienen el mismo valor en el tablero $t1$.
+\end{itemize}
+
+\item \textbf{proc sudoku\_tieneSolucion(in t: $\TLista{\TLista{\ent}}$, out tieneSolucion: $\bool$)}:  
+\begin{itemize}
+\item Dado un tablero $t$ v\'alido. 
+\item Retorna $true$ sii las celdas vac\'ias del tablero actual pueden llenarse y resulta en un tablero totalmente resuelto.  
+\end{itemize}
+
+\item \textbf{proc sudoku\_resolver(inout t: $\TLista{\TLista{\ent}}$, out tieneSolucion: $\bool$)}:  
+\begin{itemize}
+\item Si el tablero $t$ tiene soluci\'on, completa el tablero con alguna soluci\'on posible y retorna $true$. 
+\item Caso contrario, no modifica el tablero y retorna $false$
+\end{itemize}
+
+\item \textbf{proc sudoku\_copiarTablero(in src: $\TLista{\TLista{\ent}}$, out target: $\TLista{\TLista{\ent}}$)}:
+\begin{itemize}
+\item Copia el contenido del tablero $src$ en el tablero $target$.
+\end{itemize}
+
+\end{enumerate}
+
+
+\end{document}

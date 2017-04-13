@@ -1,0 +1,59 @@
+\documentclass[a4paper]{article} 
+
+\setlength{\parskip}{0.1em}
+\input{Algo1Macros}
+\usepackage{caratula} % Version modificada para usar las macros de algo1 de ~> https://github.com/bcardiff/dc-tex
+
+\begin{document}
+
+\titulo{TP de Especificaci\'on}
+\subtitulo{Sudoku}
+\fecha{1 de Abril de 2017}
+\materia{Algoritmos y Estructuras de Datos I}
+\grupo{Grupo 8}
+
+% Pongan cuantos integrantes quieran
+\integrante{Bond, James}{007}{bond@mi6.co.uk}
+%\integrante{Apellido, Nombre2}{002/01}{email2@dominio.com}
+%\integrante{Apellido, Nombre3}{003/01}{email3@dominio.com}
+%\integrante{Apellido, Nombre4}{004/01}{email4@dominio.com}
+
+\maketitle
+
+\section{Problemas}
+
+\begin{proc}{sudoku\_primeraCeldaVaciaFila}{\In t: \matriz{\ent}, \Out result: \ent}{}{}
+    \pre{esTableroValido(t)}
+    \post{\IfThenElse{(\exists i: \ent)(0 \leq i \textless |t| \yLuego filaTieneCeldaVacia(t[i]) \yLuego (\forall j: \ent)(0 \leq j \textless i \implicaLuego \neg filaTieneCeldaVacia(t[j])))\\}{result = i\\}{result = -1}}
+    %\pred{Nombre}{t: \matriz{\ent}}{\True}
+    %\aux{Aux}{i: \ent}{\bool}{\True}
+\end{proc}
+
+\begin{proc}{sudoku\_primeraCeldaVaciaColumna}{\In t: \matriz{\ent}, \Out result: \ent}{}{}
+	\pre{esTableroValido(t)}
+	\post{\IfThenElse{(\exists i: \ent)(0 \leq i \textless |t| \yLuego filaTieneCeldaVacia(t[i]) \yLuego (\forall j: \ent)(0 \leq j \textless i \implicaLuego \neg filaTieneCeldaVacia(t[j])))\\}{result = indicePrimeraCeldaVaciaEnFila(t[i])\\}{result = -1}}
+\end{proc}
+
+\begin{proc}{sudoku\_valorEnCelda}{\In t: \matriz{\ent}, \In f: \ent, \In c: \ent, \Out result: \ent}{}{}
+	\pre{esTableroValido(t) \yLuego 0 \leq f,c \leq 8 \yLuego t[i][j] \neq 0}
+	\post{result = t[f][c]}
+\end{proc}
+
+\begin{proc}{sudoku\_vaciarCelda}{\Inout t: \matriz{\ent}, \In f: \ent, \In c: \ent}{}{}
+	\pre{esTableroValido(t) \yLuego 0 \leq f,c \leq 8 \yLuego t[i][j] \neq 0 \yLuego t=t_{0}}
+	\post{t[f][c] = 0 \yLuego (\forall i: \ent)(\forall j: \ent)((0 \leq i,j \textless |t| \yLuego (i \neq f \vee j \neq c)) \implicaLuego t[i][j] = t_{0}[i][j])}
+\end{proc}
+
+\section{Predicados y Auxiliares generales}
+%\pred{PredLargo}{t: \matriz{\ent}}{\\
+        %(\forall i: \ent)(\forall j: \ent)\True\\
+        %}
+	\pred{filaTieneCeldaVacia}{f: \TLista{\ent}}{\\ 
+		%\existe{i}{0}{\longitud f} \yLuego f[i] = 0 \\
+		(\exists i: \ent)(0 \leq i \textless |f| \yLuego f[i] = 0)\\
+		}
+	%\aux{indicePrimeraCeldaVaciaEnFila}{s: \TLista{\ent}}{\ent}{\IfThenElse{\existe{i}{0}{\longitud s} }{i}{-1}}
+	\aux{indicePrimeraCeldaVaciaEnFila}{s: \TLista{\ent}}{\ent}{\IfThenElse{((\exists: i \ent)(0 \leq i \textless |s| \yLuego s[i] = 0 \yLuego \\ (\forall j: \ent)(0 \leq j \textless i \implicaLuego s[j] \neq 0)))}{i}{-1}}
+\section{Decisiones tomadas}
+
+\end{document}
