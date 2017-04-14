@@ -81,9 +81,22 @@
 
 \hfill
 
+\begin{proc}{sudoku\_llenarCelda}{\Inout t: \matriz{\ent}, \In f: \ent, \In c: \ent, \In value: \ent}{}{}
+	\pre{esTableroValido(t) \yLuego 0 \leq f,c \leq 8 \yLuego t[i][j] = 0 \yLuego 1 \leq value \leq 9 \yLuego t=t_{0}}
+	\post{t[f][c] = value \yLuego (\forall i: \ent)(\forall j: \ent)(0\leq i,j \textless |t| \yLuego (i \neq f \vee j \neq c)) \implicaLuego t[i][j]= t_{0}[i][j]}
+
+\end{proc}
+
 \begin{proc}{sudoku\_vaciarCelda}{\Inout t: \matriz{\ent}, \In f: \ent, \In c: \ent}{}{}
 	\pre{esTableroValido(t) \yLuego 0 \leq f,c \leq 8 \yLuego t[i][j] \neq 0 \yLuego t=t_{0}}
 	\post{t[f][c] = 0 \yLuego (\forall i: \ent)(\forall j: \ent)((0 \leq i,j \textless |t| \yLuego (i \neq f \vee j \neq c)) \implicaLuego t[i][j] = t_{0}[i][j])}
+\end{proc}
+
+\hfill
+
+\begin{proc}{sudoku\_esTableroParcialmenteResuelto}{\In t: \matriz{\ent}, \Out result: Bool)}{}{}
+	\pre{True}
+	\post{result = esTableroParcialmenteResuelto(t)}
 \end{proc}
 
 \hfill
@@ -135,6 +148,27 @@
 \hfill
 
 	\aux{indicePrimeraCeldaVaciaEnFila}{s: \TLista{\ent}}{\ent}{\IfThenElse{((\exists: i \ent)(0 \leq i \textless |s| \yLuego s[i] = 0 \yLuego \\ (\forall j: \ent)(0 \leq j \textless i \implicaLuego s[j] \neq 0)))}{i}{-1}}
+	
+\hfill	
+
+	\pred{noHayRepetidosEnRegion}{s: \TLista{\ent}}{
+	(\forall i: \ent)(\forall j: \ent)(\forall k: \ent)(\forall l: \ent)(0\leq i,j,k,l \textless 9 \yLuego (i div 3 = k div 3) \yLuego (j div 3 = l div 3) \yLuego (i \neq k \vee j \neq l) \implicaLuego t[i][j] \neq t[k][l]}
+	
+\hfill
+
+	\pred{noHayRepetidosEnFila}{s: \Tlista{\ent}}{
+	(\forall i: \ent)(\forall j: \ent)(0 \leq i,j \textless |s| \yLuego j \neq i \implicaLuego s[i] \neq s[j])}
+	
+\hfill
+
+	\pred{noHayRepetidosEnColumna}{t: \Tlista{\ent}}{
+	(\forall j: \ent)(0 \leq j \textless |t| \implicaLuego (\forall l: \ent)(\forall k: \ent)(0 \leq l,k \textless |t| \yLuego l \neq k \implicaLuego t[i][j] \neq t[k][j]))}
+	
+\hfill
+
+	\pred{esTableroParcialmenteResuelto}{t: \Tlista{\ent}}{
+	esTableroValido(t) \yLuego (\forall i: \ent)(0 \leq i \textless |t| \implicaLuego (noHayRepetidosEnFila(t[i]) \yLuego noHayRepetidosEnColumna(t) \yLuego noHayRepetidosEnReligion(t))}	
+	
 \section{Decisiones tomadas}
 
 
