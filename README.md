@@ -49,3 +49,8 @@ y ejecutamos este comando:
 // copia el master a tu branch, y ya tenes la ultima version en tu branch.
 
 y ahi podes seguir laburando.
+
+NOTA:
+para traerte la data de otros branchs y poder moverte a esos branchs, usar comando: "git fetch origin". esto es diferente de hacer un pull porque un pull te baja a tu pc todos los cambios del branch que le especificas, mientras que fetch origin te trae la data de los branchs existentes en el repo.
+
+cualquier duda, pregunten! (preferentemente a Guille que es alto giteador)
