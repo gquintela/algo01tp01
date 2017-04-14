@@ -25,7 +25,7 @@ trabajamos siempre en ramas, nunca en el master.
 
 terminé de laburar, y tengo q subir a git todo asi lo podemos bajar todos.
 
-5) git push
+5) git push origin {branchTuyo}
 
 6) entro a la pagina de internet de git, y en la parte del repositorio, hago un pull request, para decir que quiero mandar mi laburo a la branch master y que
 los demas lo controlen para ver si esta bien. (es bastante intuitivo donde hacerlo en la pagina, busquenlo)
@@ -36,7 +36,7 @@ nos paramos en la consola en el branch master
 
 7) git checkout master
 
-8) git pull
+8) git pull origin master
 
 /actualiza todo lo q esta bien del master
 
