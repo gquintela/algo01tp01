@@ -8,19 +8,55 @@
 
 \titulo{TP de Especificaci\'on}
 \subtitulo{Sudoku}
-\fecha{1 de Abril de 2017}
+\fecha{21 de Abril de 2017}
 \materia{Algoritmos y Estructuras de Datos I}
-\grupo{Grupo 8}
+\grupo{Grupo 17}
 
 % Pongan cuantos integrantes quieran
-\integrante{Bond, James}{007}{bond@mi6.co.uk}
-%\integrante{Apellido, Nombre2}{002/01}{email2@dominio.com}
-%\integrante{Apellido, Nombre3}{003/01}{email3@dominio.com}
-%\integrante{Apellido, Nombre4}{004/01}{email4@dominio.com}
+\integrante{Maqueda, Ignacio}{279/14}{ignaciomaqueda95@gmail.com}
+\integrante{Parral, Guillermo}{280/16}{guillermoeparral@gmail.com}
+\integrante{Quintela, Gonzalo}{089/16}{gquintela@dc.uba.ar}
+\integrante{Sirio, Tomás}{440/16}{tomassirio@gmail.com}
 
 \maketitle
 
 \section{Problemas}
+
+\begin{proc}{ sudoku\_esTableroValido}{\In t: \matriz{\ent}, \Out result: \bool}{}{}
+    \pre{\True}
+    \post{result=esTableroValido(t)}
+
+   % \pred{PredLargo}{t: \matriz{\ent}}{\\
+    %   (\forall i: \ent)(\forall j: \ent)\True\\
+    %    }
+    %\aux{Aux}{i: \ent}{\bool}{\True}
+\end{proc}
+
+\hfill
+
+\begin{proc}{sudoku\_esCeldaVacia}{\In t: \matriz{\ent}, \In f: \ent,\In c: \ent, \Out result: \bool}{}{}
+    \pre{esTableroValido(t) $\yLuego$ 0 \leq f,c < |t|}
+    \post{result=(t[f][c]=0)}
+
+   % \pred{PredLargo}{t: \matriz{\ent}}{\\
+    %   (\forall i: \ent)(\forall j: \ent)\True\\
+    %    }
+    %\aux{Aux}{i: \ent}{\bool}{\True}
+\end{proc}
+
+\hfill
+
+\begin{proc}{sudoku\_nroDeCeldasVacias}{\In t: \matriz{\ent}, \Out result: \ent}{}{}
+    \pre{esTableroValido(t)}
+    \post{$\sum_{i=0}^{|t|-1} ($ $\sum_{j=0}^{|t|-1} \IfThenElse{t[i][j] = 0 }{1}{0} $}
+
+   % \pred{PredLargo}{t: \matriz{\ent}}{\\
+    %   (\forall i: \ent)(\forall j: \ent)\True\\
+    %    }
+    %\aux{Aux}{i: \ent}{\bool}{\True}
+\end{proc}
+
+\hfill
 
 \begin{proc}{sudoku\_primeraCeldaVaciaFila}{\In t: \matriz{\ent}, \Out result: \ent}{}{}
     \pre{esTableroValido(t)}
@@ -29,30 +65,75 @@
     %\aux{Aux}{i: \ent}{\bool}{\True}
 \end{proc}
 
+\hfill
+
 \begin{proc}{sudoku\_primeraCeldaVaciaColumna}{\In t: \matriz{\ent}, \Out result: \ent}{}{}
 	\pre{esTableroValido(t)}
 	\post{\IfThenElse{(\exists i: \ent)(0 \leq i \textless |t| \yLuego filaTieneCeldaVacia(t[i]) \yLuego (\forall j: \ent)(0 \leq j \textless i \implicaLuego \neg filaTieneCeldaVacia(t[j])))\\}{result = indicePrimeraCeldaVaciaEnFila(t[i])\\}{result = -1}}
 \end{proc}
+
+\hfill
 
 \begin{proc}{sudoku\_valorEnCelda}{\In t: \matriz{\ent}, \In f: \ent, \In c: \ent, \Out result: \ent}{}{}
 	\pre{esTableroValido(t) \yLuego 0 \leq f,c \leq 8 \yLuego t[i][j] \neq 0}
 	\post{result = t[f][c]}
 \end{proc}
 
+\hfill
+
 \begin{proc}{sudoku\_vaciarCelda}{\Inout t: \matriz{\ent}, \In f: \ent, \In c: \ent}{}{}
 	\pre{esTableroValido(t) \yLuego 0 \leq f,c \leq 8 \yLuego t[i][j] \neq 0 \yLuego t=t_{0}}
 	\post{t[f][c] = 0 \yLuego (\forall i: \ent)(\forall j: \ent)((0 \leq i,j \textless |t| \yLuego (i \neq f \vee j \neq c)) \implicaLuego t[i][j] = t_{0}[i][j])}
 \end{proc}
 
+\hfill
+
 \section{Predicados y Auxiliares generales}
 %\pred{PredLargo}{t: \matriz{\ent}}{\\
         %(\forall i: \ent)(\forall j: \ent)\True\\
         %}
+
+    \pred{esMatriz}{t: \matriz{\ent}}{
+    
+   (\forall i: \ent)(\forall j: \ent)( 0\leq i,j <|t| $\implicaLuego$ $|$ t[i] $|$ = $|$ t[j] $|$)}
+
+\hfill
+
+    \aux{cantidadFilas}{t: \matriz{\ent}}{\ent}{|t|}
+    
+\hfill    
+    
+    \aux{cantidadColumnas}{t: \matriz{\ent}}{\ent}{
+    \IfThenElse{filas(t)>0}{|t[0]|}{0}} 
+
+\hfill
+
+    \pred{esMatrizCuadrada}{t: \matriz{\ent}}{
+    
+    esMatriz(t) $\land$ ( cantidadFilas(t) = cantidadColumnas(t) )}
+
+\hfill
+
+    \pred{esTableroValido}{t: \matriz{\ent}}{
+    
+\hfill    
+    
+   esMatrizCuadrada(t) $\yLuego$ $|$t$|$=9  $\yLuego$ (\forall i: \ent)(\forall j: \ent)( 0\leq i,j <|t| $\implicaLuego$ 0 \leq t[i][j] \leq 9)}
+
+
+\hfill
+
+
+
+
 	\pred{filaTieneCeldaVacia}{f: \TLista{\ent}}{\\ 
 		%\existe{i}{0}{\longitud f} \yLuego f[i] = 0 \\
 		(\exists i: \ent)(0 \leq i \textless |f| \yLuego f[i] = 0)\\
 		}
 	%\aux{indicePrimeraCeldaVaciaEnFila}{s: \TLista{\ent}}{\ent}{\IfThenElse{\existe{i}{0}{\longitud s} }{i}{-1}}
+
+\hfill
+
 	\aux{indicePrimeraCeldaVaciaEnFila}{s: \TLista{\ent}}{\ent}{\IfThenElse{((\exists: i \ent)(0 \leq i \textless |s| \yLuego s[i] = 0 \yLuego \\ (\forall j: \ent)(0 \leq j \textless i \implicaLuego s[j] \neq 0)))}{i}{-1}}
 \section{Decisiones tomadas}
 
