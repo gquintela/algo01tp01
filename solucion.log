@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.4.14)  14 APR 2017 16:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.4.14)  14 APR 2017 18:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1203,118 +1203,16 @@ LaTeX Warning: Command \textless invalid in math mode on input line 86.
 
 LaTeX Warning: Command \textless invalid in math mode on input line 86.
 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.98 ...mplicaLuego$ $|$ t[i] $|$ = $|$ t[j] $|$)}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
+
+LaTeX Warning: Command \textless invalid in math mode on input line 92.
+
+
+LaTeX Warning: Command \textless invalid in math mode on input line 92.
 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.98 ...mplicaLuego$ $|$ t[i] $|$ = $|$ t[j] $|$)}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.98 ...mplicaLuego$ $|$ t[i] $|$ = $|$ t[j] $|$)}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-! LaTeX Error: Command \bfseries invalid in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.98 ...mplicaLuego$ $|$ t[i] $|$ = $|$ t[j] $|$)}
-                                                  
-Please use the math alphabet \mathbf instead of the \bfseries command. 
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.98 ...mplicaLuego$ $|$ t[i] $|$ = $|$ t[j] $|$)}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.98 ...mplicaLuego$ $|$ t[i] $|$ = $|$ t[j] $|$)}
-                                                  
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Too many }'s.
-\pred ...ath {#3}\}{\normalfont \bfseries \,\par }
-                                                  
-l.98 ...mplicaLuego$ $|$ t[i] $|$ = $|$ t[j] $|$)}
-                                                  
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.113 ...cantidadFilas(t) = cantidadColumnas(t) )}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-! LaTeX Error: Command \bfseries invalid in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.113 ...cantidadFilas(t) = cantidadColumnas(t) )}
-                                                  
-Please use the math alphabet \mathbf instead of the \bfseries command. 
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.113 ...cantidadFilas(t) = cantidadColumnas(t) )}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.113 ...cantidadFilas(t) = cantidadColumnas(t) )}
-                                                  
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Too many }'s.
-\pred ...ath {#3}\}{\normalfont \bfseries \,\par }
-                                                  
-l.113 ...cantidadFilas(t) = cantidadColumnas(t) )}
-                                                  
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.121 ...| $\implicaLuego$ 0 \leq t[i][j] \leq 9)}
+l.111 ...plicaLuego$ $|$ t[i] $|$ = $|$ t[j] $|$)}
                                                   
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1323,7 +1221,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.121 ...| $\implicaLuego$ 0 \leq t[i][j] \leq 9)}
+l.111 ...plicaLuego$ $|$ t[i] $|$ = $|$ t[j] $|$)}
                                                   
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1331,7 +1229,99 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.121 ...| $\implicaLuego$ 0 \leq t[i][j] \leq 9)}
+l.111 ...plicaLuego$ $|$ t[i] $|$ = $|$ t[j] $|$)}
+                                                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Command \bfseries invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.111 ...plicaLuego$ $|$ t[i] $|$ = $|$ t[j] $|$)}
+                                                  
+Please use the math alphabet \mathbf instead of the \bfseries command. 
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.111 ...plicaLuego$ $|$ t[i] $|$ = $|$ t[j] $|$)}
+                                                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.111 ...plicaLuego$ $|$ t[i] $|$ = $|$ t[j] $|$)}
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Too many }'s.
+\pred ...ath {#3}\}{\normalfont \bfseries \,\par }
+                                                  
+l.111 ...plicaLuego$ $|$ t[i] $|$ = $|$ t[j] $|$)}
+                                                  
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.126 ...cantidadFilas(t) = cantidadColumnas(t) )}
+                                                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Command \bfseries invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.126 ...cantidadFilas(t) = cantidadColumnas(t) )}
+                                                  
+Please use the math alphabet \mathbf instead of the \bfseries command. 
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.126 ...cantidadFilas(t) = cantidadColumnas(t) )}
+                                                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.126 ...cantidadFilas(t) = cantidadColumnas(t) )}
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Too many }'s.
+\pred ...ath {#3}\}{\normalfont \bfseries \,\par }
+                                                  
+l.126 ...cantidadFilas(t) = cantidadColumnas(t) )}
+                                                  
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.134 ...| $\implicaLuego$ 0 \leq t[i][j] \leq 9)}
                                                   
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1339,38 +1329,162 @@ you left one out. Proceed, with fingers crossed.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.121 ...| $\implicaLuego$ 0 \leq t[i][j] \leq 9)}
+l.134 ...| $\implicaLuego$ 0 \leq t[i][j] \leq 9)}
+                                                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.134 ...| $\implicaLuego$ 0 \leq t[i][j] \leq 9)}
+                                                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.134 ...| $\implicaLuego$ 0 \leq t[i][j] \leq 9)}
                                                   
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 
-LaTeX Warning: Command \textless invalid in math mode on input line 132.
+LaTeX Warning: Command \textless invalid in math mode on input line 145.
 
 
-LaTeX Warning: Command \textless invalid in math mode on input line 132.
+LaTeX Warning: Command \textless invalid in math mode on input line 145.
 
 
-LaTeX Warning: Command \textless invalid in math mode on input line 137.
+LaTeX Warning: Command \textless invalid in math mode on input line 150.
 
 
-LaTeX Warning: Command \textless invalid in math mode on input line 137.
+LaTeX Warning: Command \textless invalid in math mode on input line 150.
 
 
-LaTeX Warning: Command \textless invalid in math mode on input line 137.
+LaTeX Warning: Command \textless invalid in math mode on input line 150.
 
 
-LaTeX Warning: Command \textless invalid in math mode on input line 137.
+LaTeX Warning: Command \textless invalid in math mode on input line 150.
+
+
+LaTeX Warning: Command \textless invalid in math mode on input line 155.
+
+
+LaTeX Warning: Command \textless invalid in math mode on input line 155.
+
+! Undefined control sequence.
+<argument> s: \Tlista 
+                      {\ent }
+l.160 ...o j \neq i \implicaLuego s[i] \neq s[j])}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...f \@safe@activesfalse \ (s: \Tlista 
+                                                  {\ent }) 
+l.160 ...o j \neq i \implicaLuego s[i] \neq s[j])}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Command \textless invalid in math mode on input line 160.
+
+
+LaTeX Warning: Command \textless invalid in math mode on input line 160.
+
+! Undefined control sequence.
+<argument> t: \Tlista 
+                      {\ent }
+l.165 ...q k \implicaLuego t[i][j] \neq t[k][j]))}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...f \@safe@activesfalse \ (t: \Tlista 
+                                                  {\ent }) 
+l.165 ...q k \implicaLuego t[i][j] \neq t[k][j]))}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Command \textless invalid in math mode on input line 165.
+
+
+LaTeX Warning: Command \textless invalid in math mode on input line 165.
+
+
+LaTeX Warning: Command \textless invalid in math mode on input line 165.
+
+
+LaTeX Warning: Command \textless invalid in math mode on input line 165.
+
+! Undefined control sequence.
+<argument> t: \Tlista 
+                      {\ent }
+l.170 ...(t) \yLuego noHayRepetidosEnReligion(t))}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+<argument> ...f \@safe@activesfalse \ (t: \Tlista 
+                                                  {\ent }) 
+l.170 ...(t) \yLuego noHayRepetidosEnReligion(t))}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Command \textless invalid in math mode on input line 170.
+
+
+LaTeX Warning: Command \textless invalid in math mode on input line 170.
+
+
+Overfull \hbox (32.0267pt too wide) in paragraph at lines 170--170
+[]\OT1/cmtt/m/n/10 pred esTableroParcialmenteResuelto \OT1/cmr/m/n/10 (t: $\U/d
+srom/m/n/10 Z$\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 f$\OML/cmm/m/it/10 esTableroVa
+lido\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 ^[] \
+OT1/cmr/m/n/10 (\OMS/cmsy/m/n/10 8\OML/cmm/m/it/10 i \OT1/cmr/m/n/10 : \U/dsrom
+/m/n/10 Z\OT1/cmr/m/n/10 )(0 \OMS/cmsy/m/n/10 ^^T \OML/cmm/m/it/10 i[]\OMS/cmsy
+/m/n/10 j\OML/cmm/m/it/10 t\OMS/cmsy/m/n/10 j [][]![] \OT1/cmr/m/n/10 (\OML/cmm
+/m/it/10 noHayRepetidosEnFila\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 t\OT1/cmr/m/n/10
+ [\OML/cmm/m/it/10 i\OT1/cmr/m/n/10 ]) \OMS/cmsy/m/n/10 ^[]
+ []
 
 [2] (./solucion.aux
 LaTeX Info: Redefining \. on input line 7.
 LaTeX Info: Redefining \% on input line 7.
 ) ) 
 Here is how much of TeX's memory you used:
- 13256 strings out of 493029
- 234363 string characters out of 6136234
+ 13257 strings out of 493029
+ 234369 string characters out of 6136234
  308105 words of memory out of 5000000
- 16503 multiletter control sequences out of 15000+600000
+ 16504 multiletter control sequences out of 15000+600000
  8819 words of font info for 36 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  50i,8n,45p,478b,384s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1387,7 +1501,7 @@ ts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/public/doublestroke/dsrom10.pfb>
-Output written on solucion.pdf (3 pages, 508702 bytes).
+Output written on solucion.pdf (3 pages, 512889 bytes).
 PDF statistics:
  75 PDF objects out of 1000 (max. 8388607)
  53 compressed objects within 1 object stream
