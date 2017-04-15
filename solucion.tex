@@ -60,7 +60,9 @@
 
 \begin{proc}{sudoku\_primeraCeldaVaciaFila}{\In t: \matriz{\ent}, \Out result: \ent}{}{}
     \pre{esTableroValido(t)}
-    \post{\IfThenElse{(\exists i: \ent)(0 \leq i \textless |t| \yLuego filaTieneCeldaVacia(t[i]) \yLuego (\forall j: \ent)(0 \leq j \textless i \implicaLuego \neg filaTieneCeldaVacia(t[j])))\\}{result = i\\}{result = -1}}
+    \post{\IfThenElse{(\exists i: \ent)(0 \leq i \textless |t| \yLuego filaTieneCeldaVacia(t[i]) \yLuego (\forall j: \ent)
+\\    
+    (0 \leq j \textless i \implicaLuego \neg filaTieneCeldaVacia(t[j])))\\}{result = i\\}{result = -1}}
     %\pred{Nombre}{t: \matriz{\ent}}{\True}
     %\aux{Aux}{i: \ent}{\bool}{\True}
 \end{proc}
@@ -100,6 +102,28 @@
 \end{proc}
 
 \hfill
+\\
+\\
+
+\begin{proc}{sudoku\_esTableroTotalmenteResuelto}{\In t: \matriz{\ent}, \Out result: \bool}{}{}
+    \pre{true}
+    \post{esParcialmenteResuelto(t)  $\yLuego$ \forall i: \ent) (0 \leq i < |t| $\implicaLuego$ \neg filaTieneCeldaVacia(t[i]) }
+    \end{proc}
+    
+    \hfill
+
+\begin{proc}{sudoku\_esTablero}{\In t_{0},t_{1}: \matriz{\ent}, \Out result: \bool}{}{}
+    \pre{true}
+    \post{esSubtablero(t_{0},t_{1})=result}
+    \end{proc}
+    
+    \hfill
+
+\begin{proc}{sudoku\_esSubTablero}{\In t_{0},t_{1}: \matriz{\ent}, \Out result: \bool}{}{}
+    \pre{true}
+    \post{esSubtablero(t_{0},t_{1})=result}
+    \end{proc}
+   
 
 \section{Predicados y Auxiliares generales}
 %\pred{PredLargo}{t: \matriz{\ent}}{\\
@@ -117,7 +141,7 @@
 \hfill    
     
     \aux{cantidadColumnas}{t: \matriz{\ent}}{\ent}{
-    \IfThenElse{filas(t)>0}{|t[0]|}{0}} 
+    \IfThenElse{cantidadFilas(t)>0}{|t[0]|}{0}} 
 
 \hfill
 
@@ -127,11 +151,10 @@
 
 \hfill
 
-    \pred{esTableroValido}{t: \matriz{\ent}}{
-    
-\hfill    
-    
-   esMatrizCuadrada(t) $\yLuego$ $|$t$|$=9  $\yLuego$ (\forall i: \ent)(\forall j: \ent)( 0\leq i,j <|t| $\implicaLuego$ 0 \leq t[i][j] \leq 9)}
+    \pred{esTableroValido}{t: \matriz{\ent}}{   
+   esMatrizCuadrada(t) $\yLuego$ $|$t$|$=9 
+    $\yLuego$ \\
+    (\forall i: \ent)(\forall j: \ent)( 0\leq i,j <|t| $\implicaLuego$ 0 \leq t[i][j] \leq 9)}
 
 
 \hfill
@@ -141,7 +164,7 @@
 
 	\pred{filaTieneCeldaVacia}{f: \TLista{\ent}}{\\ 
 		%\existe{i}{0}{\longitud f} \yLuego f[i] = 0 \\
-		(\exists i: \ent)(0 \leq i \textless |f| \yLuego f[i] = 0)\\
+		(\exists i: \ent)(0 \leq i \textless |f| \yLuego f[i] = 0)
 		}
 	%\aux{indicePrimeraCeldaVaciaEnFila}{s: \TLista{\ent}}{\ent}{\IfThenElse{\existe{i}{0}{\longitud s} }{i}{-1}}
 
@@ -152,7 +175,8 @@
 \hfill	
 
 	\pred{noHayRepetidosEnRegion}{s: \TLista{\ent}}{
-	(\forall i: \ent)(\forall j: \ent)(\forall k: \ent)(\forall l: \ent)(0\leq i,j,k,l \textless 9 \yLuego (i div 3 = k div 3) \yLuego (j div 3 = l div 3) \yLuego (i \neq k \vee j \neq l) \implicaLuego t[i][j] \neq t[k][l]}
+	(\forall i: \ent)(\forall j: \ent)(\forall k: \ent)(\forall l: \ent)\\
+	(0\leq i,j,k,l \textless 9 \yLuego (i div 3 = k div 3) \yLuego (j div 3 = l div 3) \yLuego (i \neq k \vee j \neq l) \implicaLuego t[i][j] \neq t[k][l]}
 	
 \hfill
 
@@ -162,12 +186,23 @@
 \hfill
 
 	\pred{noHayRepetidosEnColumna}{t: \Tlista{\ent}}{
-	(\forall j: \ent)(0 \leq j \textless |t| \implicaLuego (\forall l: \ent)(\forall k: \ent)(0 \leq l,k \textless |t| \yLuego l \neq k \implicaLuego t[i][j] \neq t[k][j]))}
+	(\forall j: \ent)(0 \leq j \textless |t| \implicaLuego (\forall l: \ent)(\forall k: \ent)\\
+	(0 \leq l,k \textless |t| \yLuego l \neq k  \implicaLuego t[i][j] \neq t[k][j]))}
 	
 \hfill
 
 	\pred{esTableroParcialmenteResuelto}{t: \Tlista{\ent}}{
-	esTableroValido(t) \yLuego (\forall i: \ent)(0 \leq i \textless |t| \implicaLuego (noHayRepetidosEnFila(t[i]) \yLuego noHayRepetidosEnColumna(t) \yLuego noHayRepetidosEnReligion(t))}	
+	esTableroValido(t) \yLuego (\forall i: \ent)(0 \leq i \textless |t| \implicaLuego \\
+	  (noHayRepetidosEnFila(t[i]) \yLuego noHayRepetidosEnColumna(t) \yLuego noHayRepetidosEnReligion(t))}	
+	
+\hfill
+
+    \pred{esSubTablero}{t_{0},t_{1} : \matriz{\ent}}{
+    
+    ( esTableroValido(t_{0}) \yLuego  esTableroValido(t_{1}) ) \yLuego ( (\forall i: \ent) (\forall j: \ent)
+\\    
+     ( 0 \leq i |t| \yLuego t_{0} [i][j] \neq 0 ) \implicaLuego  (t_{0}[i][j] = t_{1}[i][j])	 }	
+	
 	
 \section{Decisiones tomadas}
 
