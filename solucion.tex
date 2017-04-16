@@ -144,24 +144,24 @@
 
 	\pred{noHayRepetidosEnRegion}{s: \TLista{\ent}}{
 	(\forall i: \ent)(\forall j: \ent)(\forall k: \ent)(\forall l: \ent)\\
-	(0\leq i,j,k,l < 9 \yLuego (i div 3 = k div 3) \yLuego (j div 3 = l div 3) \yLuego (i \neq k \vee j \neq l) \implicaLuego t[i][j] \neq t[k][l]\\}
+	(0\leq i,j,k,l < 9 \yLuego (i div 3 = k div 3) \yLuego (j div 3 = l div 3) \yLuego (i \neq k \vee j \neq l) \implicaLuego (t[i][j] = 0 \vee t[k][l] = 0 \vee t[i][j] \neq t[k][l]))\\}
 	
 \hfill
 
 	\pred{noHayRepetidosEnFila}{s: \Tlista{\ent}}{
-	(\forall i: \ent)(\forall j: \ent)(0 \leq i,j < |s| \yLuego j \neq i \implicaLuego s[i] \neq s[j])\\}
+	(\forall i: \ent)(\forall j: \ent)(0 \leq i,j < |s| \yLuego j \neq i \implicaLuego (s[i] = 0 \vee s[j] = 0 \vee s[i] \neq s[j]))\\}
 	
 \hfill
 
 	\pred{noHayRepetidosEnColumna}{t: \Tlista{\ent}}{
 	(\forall j: \ent)(0 \leq j < |t| \implicaLuego (\forall l: \ent)(\forall k: \ent)\\
-	(0 \leq l,k < |t| \yLuego l \neq k  \implicaLuego t[i][j] \neq t[k][j]))\\}
+	(0 \leq l,k < |t| \yLuego l \neq k  \implicaLuego (t[i][j] = 0 \vee t[k][l] = 0 \vee t[i][j] \neq t[k][j])))\\}
 	
 \hfill
 
 	\pred{esTableroParcialmenteResuelto}{t: \Tlista{\ent}}{
 	esTableroValido(t) \yLuego (\forall i: \ent)(0 \leq i < |t| \implicaLuego \\
-	  (noHayRepetidosEnFila(t[i]) \yLuego noHayRepetidosEnColumna(t) \yLuego noHayRepetidosEnReligion(t))\\}	
+	  (noHayRepetidosEnFila(t[i]) \yLuego noHayRepetidosEnColumna(t) \yLuego noHayRepetidosEnRegion(t))\\}	
 	
 \hfill
 
