@@ -71,6 +71,8 @@
 
 \end{proc}
 
+\hfill
+
 \begin{proc}{sudoku\_vaciarCelda}{\Inout t: \matriz{\ent}, \In f: \ent, \In c: \ent}{}{}
 	\pre{esTableroValido(t) \yLuego 0 \leq f,c \leq 8 \yLuego t[f][c] \neq 0 \yLuego t=t_{0}}
 	\post{t[f][c] = 0 \yLuego (\forall i: \ent)(\forall j: \ent)((0 \leq i,j < |t| \yLuego (i \neq f \vee j \neq c)) \implicaLuego t[i][j] = t_{0}[i][j])}
@@ -98,15 +100,21 @@
     \post{result = esSubTablero(t_{0},t_{1})}
     \end{proc}
     
+\hfill
+
 \begin{proc}{sudoku\_tieneSolucion}{\In t: \matriz{\ent}, \Out tieneSolucion: \bool}{}{}
 	\pre{esTableroValido(t)}
-	\post{(\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \yLuego esSubTablero(s,t))}
+	\post{tieneSolucion = (\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \yLuego esSubTablero(s,t))}
 \end{proc}
+
+\hfill
 
 \begin{proc}{sudoku\_resolver}{\Inout t: \matriz{\ent}, \Out tieneSolucion: \bool}{}{}
 	\pre{esTableroValido(t) \yLuego t=t_{0}}
 	\post{\IfThenElse{(\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \yLuego esSubTablero(s,t))\\}{tieneSolucion=\True \wedge t=s\\}{tieneSolucion = \False}}
 \end{proc}
+
+\hfill
 
 \begin{proc}{sudoku\_copiarTablero}{\In src: \matriz{\ent}, \Out target: \matriz{\ent}}{}{}
 	\pre{esTableroValido(src)}
@@ -168,13 +176,13 @@
 	
 \hfill
 
-	\pred{esTableroParcialmenteResuelto}{t: \TLista{\ent}}{
+	\pred{esTableroParcialmenteResuelto}{t: \matriz{\ent}}{
 	esTableroValido(t) \yLuego (\forall i: \ent)(0 \leq i < |t| \implicaLuego \\
 	  noHayRepetidosEnFila(t[i])) \yLuego noHayRepetidosEnColumna(t) \yLuego noHayRepetidosEnRegion(t)\\}	
 	
 \hfill
 
-	\pred{esTableroTotalmenteResuelto}{t: \TLista{\ent}}{
+	\pred{esTableroTotalmenteResuelto}{t: \matriz{\ent}}{
 	esTableroParcialmenteResuelto(t) \yLuego (\forall i: \ent) (0 \leq i < |t| \implicaLuego \neg filaTieneCeldaVacia(t[i]))\\}	
 	
 \hfill
