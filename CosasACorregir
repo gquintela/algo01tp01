@@ -19,3 +19,26 @@ queda choto como esta escrito jdiv3, deberia ser j div 3, ver como se escribe.
 cambie el formato para los subindices para que queden bien
 
 modifique el pred cantidadColumnas que habia quedado Filas en lugar de CantidadFilas
+
+
+
+------------------------------------------------------------------------------------
+
+Seccion 2.
+- Corregir Preds para que queden formateados iguales 
+
+pred(condicion){
+blabla
+}
+
+en vez de
+
+pred(condicion){blabla}
+
+(Probar con \text)
+
+
+- Separar funciones de preds
+
+- Chequear por que sale jdiv3 todo junto
+
