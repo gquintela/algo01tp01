@@ -84,6 +84,7 @@
 \end{proc}
 
 \hfill
+\\
 
 \begin{proc}{sudoku\_esTableroTotalmenteResuelto}{\In t: \matriz{\ent}, \Out result: \bool}{}{}
     \pre{true}
@@ -92,17 +93,25 @@
     
     \hfill
 
-\begin{proc}{sudoku\_esTablero}{\In t_{0},t_{1}: \matriz{\ent}, \Out result: \bool}{}{}
-    \pre{true}
-    \post{esSubtablero(t_{0},t_{1})=result}
-    \end{proc}
-    
-    \hfill
-
 \begin{proc}{sudoku\_esSubTablero}{\In t_{0},t_{1}: \matriz{\ent}, \Out result: \bool}{}{}
     \pre{true}
     \post{esSubtablero(t_{0},t_{1})=result}
     \end{proc}
+    
+\begin{proc}{sudoku\_tieneSolucion}{\In t: \matriz{\ent}, \Out tieneSolucion: \bool}{}{}
+	\pre{esTableroValido(t)}
+	\post{(\exists s: \matriz{\ent})(esTotalmenteResuelto(s) \yLuego esSubTablero(s,t))}
+\end{proc}
+
+\begin{proc}{sudoku\_resolver}{\Inout t: \matriz{\ent}, \Out tieneSolucion: \bool}{}{}
+	\pre{esTableroValido(t) \yLuego t=t_{0}}
+	\post{\IfThenElse{(\exists s: \matriz{\ent})(esTotalmenteResuelto(s) \yLuego esSubTablero(s,t))\\}{tieneSolucion=true \wedge t=s\\}{tieneSolucion = false}}
+\end{proc}
+
+\begin{proc}{sudoku\_copiarTablero}{\In src: \matriz{\ent}, \Out target: \matriz{\ent}}{}{}
+	\pre{esTableroValido(src)}
+	\post{(\forall i: \ent)(\forall j: \ent)(0 \leq i,j < |src| \implicaLuego (target[i][j] = src[i][j] \yLuego esTableroValido(target))}
+\end{proc}
    
 
 \section{Predicados y Auxiliares generales}
