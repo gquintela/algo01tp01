@@ -1,4 +1,5 @@
 \documentclass[a4paper]{article} 
+\usepackage{amsmath}
 
 \setlength{\parskip}{0.1em}
 \input{Algo1Macros}
@@ -129,15 +130,6 @@
 
 \hfill
 
-    \aux{cantidadFilas}{t: \matriz{\ent}}{\ent}{|t|}
-    
-\hfill    
-    
-    \aux{cantidadColumnas}{t: \matriz{\ent}}{\ent}{
-    \IfThenElse{cantidadFilas(t)>0}{|t[0]|}{0}} 
-
-\hfill
-
     \pred{esMatrizCuadrada}{t: \matriz{\ent}}{\\
     esMatriz(t) \land (cantidadFilas(t) = cantidadColumnas(t))\\}
 
@@ -153,15 +145,11 @@
 	\pred{filaTieneCeldaVacia}{f: \TLista{\ent}}{\\ 
 	(\exists i: \ent)(0 \leq i < |f| \yLuego f[i] = 0)\\}
 
-\hfill
-
-	\aux{indicePrimeraCeldaVaciaEnFila}{s: \TLista{\ent}}{\ent}{\IfThenElse{((\exists i: \ent)(0 \leq i < |s| \yLuego s[i] = 0 \yLuego \\ (\forall j: \ent)(0 \leq j < i \implicaLuego s[j] \neq 0)))}{i}{-1}}
-	
 \hfill	
 
 	\pred{noHayRepetidosEnRegion}{t: \matriz{\ent}}{
 	(\forall i: \ent)(\forall j: \ent)(\forall k: \ent)(\forall l: \ent)\\
-	(0\leq i,j,k,l < 9 \yLuego (i div 3 = k div 3) \yLuego (j div 3 = l div 3) \yLuego (i \neq k \vee j \neq l) \implicaLuego (t[i][j] = 0 \vee t[k][l] = 0 \vee t[i][j] \neq t[k][l]))\\}
+	(0\leq i,j,k,l < 9 \yLuego (i \text{ div } 3 = k \text{ div } 3) \yLuego (j \text{ div } 3 = l \text{ div } 3) \yLuego (i \neq k \vee j \neq l) \implicaLuego (t[i][j] = 0 \vee t[k][l] = 0 \vee t[i][j] \neq t[k][l]))\\}
 	
 \hfill
 
@@ -191,6 +179,18 @@
     esTableroValido(t_{0}) \yLuego  esTableroValido(t_{1})  \yLuego  (\forall i: \ent) (\forall j: \ent)\\    
     ( (0 \leq i |t| \yLuego t_{0}[i][j] \neq 0 ) \implicaLuego  t_{0}[i][j] = t_{1}[i][j])\\}	
 	
+	\aux{cantidadFilas}{t: \matriz{\ent}}{\ent}{|t|}
+    
+\hfill    
+    
+    \aux{cantidadColumnas}{t: \matriz{\ent}}{\ent}{
+    \IfThenElse{cantidadFilas(t)>0}{|t[0]|}{0}} 
+
+\hfill
+
+\aux{indicePrimeraCeldaVaciaEnFila}{s: \TLista{\ent}}{\ent}{\IfThenElse{((\exists i: \ent)(0 \leq i < |s| \yLuego s[i] = 0 \yLuego \\ (\forall j: \ent)(0 \leq j < i \implicaLuego s[j] \neq 0)))}{i}{-1}}
+	
+\hfill
 	
 \section{Decisiones tomadas}
 
