@@ -1,27 +1,5 @@
 COSAS A CORREGIR
 
-ejercicio 9
-
-se puede usar un pred con el mismo nombre que un proc?
---
-
-ej 11
-
-de vuelta usamos un pro
---
-
-pred noHayRepetidosEnRegion
-
-queda choto como esta escrito jdiv3, deberia ser j div 3, ver como se escribe.
-
-
-
-cambie el formato para los subindices para que queden bien
-
-modifique el pred cantidadColumnas que habia quedado Filas en lugar de CantidadFilas
-
-
-
 ------------------------------------------------------------------------------------
 
 Seccion 2.
@@ -34,11 +12,3 @@ blabla
 en vez de
 
 pred(condicion){blabla}
-
-(Probar con \text)
-
-
-- Separar funciones de preds
-
-- Chequear por que sale jdiv3 todo junto
-
