@@ -161,7 +161,7 @@
 
 	\pred{noHayRepetidosEnRegion}{t: \matriz{\ent}}{
 	(\forall i: \ent)(\forall j: \ent)(\forall k: \ent)(\forall l: \ent)\\
-	(0\leq i,j,k,l < 9 \yLuego (i div 3 = k div 3) \yLuego (j div 3 = l div 3) \yLuego (i \neq k \vee j \neq l) \implicaLuego (t[i][j] = 0 \vee t[k][l] = 0 \vee t[i][j] \neq t[k][l]))\\}
+	(0\leq i,j,k,l < 9 \wedge (i div 3 = k div 3) \wedge (j div 3 = l div 3) \wedge (i \neq k \vee j \neq l) \implicaLuego (t[i][j] = 0 \oLuego t[k][l] = 0 \oLuego t[i][j] \neq t[k][l]))\\}
 	
 \hfill
 
