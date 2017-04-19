@@ -55,6 +55,8 @@
 \begin{proc}{sudoku\_primeraCeldaVaciaColumna}{\In t: \matriz{\ent}, \Out result: \ent}{}{}
 	\pre{esTableroValido(t)}
 	\post{\IfThenElse{(\exists i: \ent)(0 \leq i < |t| \yLuego filaTieneCeldaVacia(t[i]) \yLuego (\forall j: \ent)(0 \leq j < i \implicaLuego \neg filaTieneCeldaVacia(t[j])))\\}{result = indicePrimeraCeldaVaciaEnFila(t[i])\\}{result = -1}}
+	\aux{indicePrimeraCeldaVaciaEnFila}{s: \TLista{\ent}}{\ent}{\IfThenElse{((\exists i: \ent)(0 \leq i < |s| \yLuego s[i] = 0 \yLuego \\ (\forall j: \ent)(0 \leq j < i \implicaLuego s[j] \neq 0)))}{i}{-1}}
+	
 \end{proc}
 
 \hfill
@@ -149,7 +151,7 @@
 
 	\pred{noHayRepetidosEnRegion}{t: \matriz{\ent}}{
 	(\forall i: \ent)(\forall j: \ent)(\forall k: \ent)(\forall l: \ent)\\
-	(0\leq i,j,k,l < 9 \wedge (i \text{ div } 3 = k \text{ div } 3) \wedge (j \text{ div } 3 = l \text{ div } 3) \wedge (i \neq k \vee j \neq l) \implicaLuego (t[i][j] = 0 \oLuego t[k][l] = 0 \oLuego t[i][j] \neq t[k][l]))\\}
+	(0\leq i,j,k,l < 9 \wedge (i \text{ div } 3 = k \text{ div } 3) \wedge (j \text{ div } 3 = l \text{ div } 3) \wedge (i \neq k \vee j \neq l) \implicaLuego (t[i][j] = 0 \vee t[k][l] = 0 \vee t[i][j] \neq t[k][l]))\\}
 	
 \hfill
 
@@ -187,13 +189,6 @@
     \IfThenElse{cantidadFilas(t)>0}{|t[0]|}{0}} 
 
 \hfill
-
-\aux{indicePrimeraCeldaVaciaEnFila}{s: \TLista{\ent}}{\ent}{\IfThenElse{((\exists i: \ent)(0 \leq i < |s| \yLuego s[i] = 0 \yLuego \\ (\forall j: \ent)(0 \leq j < i \implicaLuego s[j] \neq 0)))}{i}{-1}}
-	
-\hfill
-	
-\section{Decisiones tomadas}
-
 
 
 \end{document}
