@@ -1,21 +1,14 @@
 COSAS A CORREGIR
 
-ejercicio 9
+------------------------------------------------------------------------------------
 
-se puede usar un pred con el mismo nombre que un proc?
---
+Seccion 2.
+- Corregir Preds para que queden formateados iguales 
 
-ej 11
+pred(condicion){
+blabla
+}
 
-de vuelta usamos un pro
---
+en vez de
 
-pred noHayRepetidosEnRegion
-
-queda choto como esta escrito jdiv3, deberia ser j div 3, ver como se escribe.
-
-
-
-cambie el formato para los subindices para que queden bien
-
-modifique el pred cantidadColumnas que habia quedado Filas en lugar de CantidadFilas
+pred(condicion){blabla}

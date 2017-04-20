@@ -1,4 +1,5 @@
 \documentclass[a4paper]{article} 
+\usepackage{amsmath}
 
 \setlength{\parskip}{0.1em}
 \input{Algo1Macros}
@@ -54,32 +55,36 @@
 \begin{proc}{sudoku\_primeraCeldaVaciaColumna}{\In t: \matriz{\ent}, \Out result: \ent}{}{}
 	\pre{esTableroValido(t)}
 	\post{\IfThenElse{(\exists i: \ent)(0 \leq i < |t| \yLuego filaTieneCeldaVacia(t[i]) \yLuego (\forall j: \ent)(0 \leq j < i \implicaLuego \neg filaTieneCeldaVacia(t[j])))\\}{result = indicePrimeraCeldaVaciaEnFila(t[i])\\}{result = -1}}
+	\aux{indicePrimeraCeldaVaciaEnFila}{s: \TLista{\ent}}{\ent}{\IfThenElse{((\exists i: \ent)(0 \leq i < |s| \yLuego s[i] = 0 \yLuego \\ (\forall j: \ent)(0 \leq j < i \implicaLuego s[j] \neq 0)))}{i}{-1}}
+	
 \end{proc}
 
 \hfill
 
 \begin{proc}{sudoku\_valorEnCelda}{\In t: \matriz{\ent}, \In f: \ent, \In c: \ent, \Out result: \ent}{}{}
-	\pre{esTableroValido(t) \yLuego 0 \leq f,c \leq 8 \yLuego t[i][j] \neq 0}
+	\pre{esTableroValido(t) \yLuego 0 \leq f,c \leq 8 \yLuego t[f][c] \neq 0}
 	\post{result = t[f][c]}
 \end{proc}
 
 \hfill
 
 \begin{proc}{sudoku\_llenarCelda}{\Inout t: \matriz{\ent}, \In f: \ent, \In c: \ent, \In value: \ent}{}{}
-	\pre{esTableroValido(t) \yLuego 0 \leq f,c \leq 8 \yLuego t[i][j] = 0 \yLuego 1 \leq value \leq 9 \yLuego t=t_{0}}
-	\post{t[f][c] = value \yLuego (\forall i: \ent)(\forall j: \ent)(0\leq i,j < |t| \yLuego (i \neq f \vee j \neq c)) \implicaLuego t[i][j]= t_{0}[i][j]}
+	\pre{esTableroValido(t) \yLuego 0 \leq f,c \leq 8 \yLuego t[f][c] = 0 \yLuego 1 \leq value \leq 9 \yLuego t=t_{0}}
+	\post{t[f][c] = value \yLuego (\forall i: \ent)(\forall j: \ent)((0\leq i,j < |t| \yLuego (i \neq f \vee j \neq c)) \implicaLuego t[i][j]= t_{0}[i][j])}
 
 \end{proc}
 
+\hfill
+
 \begin{proc}{sudoku\_vaciarCelda}{\Inout t: \matriz{\ent}, \In f: \ent, \In c: \ent}{}{}
-	\pre{esTableroValido(t) \yLuego 0 \leq f,c \leq 8 \yLuego t[i][j] \neq 0 \yLuego t=t_{0}}
+	\pre{esTableroValido(t) \yLuego 0 \leq f,c \leq 8 \yLuego t[f][c] \neq 0 \yLuego t=t_{0}}
 	\post{t[f][c] = 0 \yLuego (\forall i: \ent)(\forall j: \ent)((0 \leq i,j < |t| \yLuego (i \neq f \vee j \neq c)) \implicaLuego t[i][j] = t_{0}[i][j])}
 \end{proc}
 
 \hfill
 
 \begin{proc}{sudoku\_esTableroParcialmenteResuelto}{\In t: \matriz{\ent}, \Out result: Bool)}{}{}
-	\pre{True}
+	\pre{\True}
 	\post{result = esTableroParcialmenteResuelto(t)}
 \end{proc}
 
@@ -87,30 +92,36 @@
 \\
 
 \begin{proc}{sudoku\_esTableroTotalmenteResuelto}{\In t: \matriz{\ent}, \Out result: \bool}{}{}
-    \pre{true}
-    \post{esParcialmenteResuelto(t) \yLuego \forall i: \ent) (0 \leq i < |t| \implicaLuego \neg filaTieneCeldaVacia(t[i])}
+    \pre{\True}
+    \post{result = esTableroTotalmenteResuelto(t)}
     \end{proc}
     
     \hfill
 
 \begin{proc}{sudoku\_esSubTablero}{\In t_{0},t_{1}: \matriz{\ent}, \Out result: \bool}{}{}
-    \pre{true}
-    \post{esSubtablero(t_{0},t_{1})=result}
+    \pre{\True}
+    \post{result = esSubTablero(t_{0},t_{1})}
     \end{proc}
     
+\hfill
+
 \begin{proc}{sudoku\_tieneSolucion}{\In t: \matriz{\ent}, \Out tieneSolucion: \bool}{}{}
 	\pre{esTableroValido(t)}
-	\post{(\exists s: \matriz{\ent})(esTotalmenteResuelto(s) \yLuego esSubTablero(s,t))}
+	\post{tieneSolucion = (\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \yLuego esSubTablero(s,t))}
 \end{proc}
+
+\hfill
 
 \begin{proc}{sudoku\_resolver}{\Inout t: \matriz{\ent}, \Out tieneSolucion: \bool}{}{}
 	\pre{esTableroValido(t) \yLuego t=t_{0}}
-	\post{\IfThenElse{(\exists s: \matriz{\ent})(esTotalmenteResuelto(s) \yLuego esSubTablero(s,t))\\}{tieneSolucion=true \wedge t=s\\}{tieneSolucion = false}}
+	\post{\IfThenElse{(\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \yLuego esSubTablero(s,t))\\}{tieneSolucion=\True \wedge t=s\\}{tieneSolucion = \False}}
 \end{proc}
+
+\hfill
 
 \begin{proc}{sudoku\_copiarTablero}{\In src: \matriz{\ent}, \Out target: \matriz{\ent}}{}{}
 	\pre{esTableroValido(src)}
-	\post{(\forall i: \ent)(\forall j: \ent)(0 \leq i,j < |src| \implicaLuego (target[i][j] = src[i][j] \yLuego esTableroValido(target))}
+	\post{esTableroValido(target) \yLuego (\forall i: \ent)(\forall j: \ent)(0 \leq i,j < |src| \implicaLuego target[i][j] = src[i][j])}
 \end{proc}
    
 
@@ -118,15 +129,6 @@
 
     \pred{esMatriz}{t: \matriz{\ent}}{\\
     (\forall i: \ent)(\forall j: \ent)( 0\leq i,j <|t| \implicaLuego |t[i]| = |t[j]|)\\}
-
-\hfill
-
-    \aux{cantidadFilas}{t: \matriz{\ent}}{\ent}{|t|}
-    
-\hfill    
-    
-    \aux{cantidadColumnas}{t: \matriz{\ent}}{\ent}{
-    \IfThenElse{cantidadFilas(t)>0}{|t[0]|}{0}} 
 
 \hfill
 
@@ -145,42 +147,48 @@
 	\pred{filaTieneCeldaVacia}{f: \TLista{\ent}}{\\ 
 	(\exists i: \ent)(0 \leq i < |f| \yLuego f[i] = 0)\\}
 
-\hfill
-
-	\aux{indicePrimeraCeldaVaciaEnFila}{s: \TLista{\ent}}{\ent}{\IfThenElse{((\exists: i \ent)(0 \leq i < |s| \yLuego s[i] = 0 \yLuego \\ (\forall j: \ent)(0 \leq j < i \implicaLuego s[j] \neq 0)))}{i}{-1}}
-	
 \hfill	
 
-	\pred{noHayRepetidosEnRegion}{s: \TLista{\ent}}{
+	\pred{noHayRepetidosEnRegion}{t: \matriz{\ent}}{
 	(\forall i: \ent)(\forall j: \ent)(\forall k: \ent)(\forall l: \ent)\\
-	(0\leq i,j,k,l < 9 \yLuego (i div 3 = k div 3) \yLuego (j div 3 = l div 3) \yLuego (i \neq k \vee j \neq l) \implicaLuego (t[i][j] = 0 \vee t[k][l] = 0 \vee t[i][j] \neq t[k][l]))\\}
+	(0\leq i,j,k,l < 9 \wedge (i \text{ div } 3 = k \text{ div } 3) \wedge (j \text{ div } 3 = l \text{ div } 3) \wedge (i \neq k \vee j \neq l) \implicaLuego (t[i][j] = 0 \vee t[k][l] = 0 \vee t[i][j] \neq t[k][l]))\\}
 	
 \hfill
 
-	\pred{noHayRepetidosEnFila}{s: \Tlista{\ent}}{
-	(\forall i: \ent)(\forall j: \ent)(0 \leq i,j < |s| \yLuego j \neq i \implicaLuego (s[i] = 0 \vee s[j] = 0 \vee s[i] \neq s[j]))\\}
+	\pred{noHayRepetidosEnFila}{s: \TLista{\ent}}{
+	(\forall i: \ent)(\forall j: \ent)(0 \leq i,j < |s| \wedge j \neq i \implicaLuego (s[i] = 0 \oLuego s[j] = 0 \oLuego s[i] \neq s[j]))\\}
 	
 \hfill
 
-	\pred{noHayRepetidosEnColumna}{t: \Tlista{\ent}}{
+	\pred{noHayRepetidosEnColumna}{t: \matriz{\ent}}{
 	(\forall j: \ent)(0 \leq j < |t| \implicaLuego (\forall l: \ent)(\forall k: \ent)\\
-	(0 \leq l,k < |t| \yLuego l \neq k  \implicaLuego (t[i][j] = 0 \vee t[k][l] = 0 \vee t[i][j] \neq t[k][j])))\\}
+	(0 \leq l,k < |t| \wedge l \neq k  \implicaLuego (t[l][j] = 0 \oLuego t[k][j] = 0 \oLuego t[l][j] \neq t[k][j])))\\}
 	
 \hfill
 
-	\pred{esTableroParcialmenteResuelto}{t: \Tlista{\ent}}{
-	esTableroValido(t) \yLuego (\forall i: \ent)(0 \leq i < |t| \implicaLuego \\
-	  (noHayRepetidosEnFila(t[i]) \yLuego noHayRepetidosEnColumna(t) \yLuego noHayRepetidosEnRegion(t))\\}	
+	\pred{esTableroParcialmenteResuelto}{t: \matriz{\ent}}{
+	esTableroValido(t) \wedge (\forall i: \ent)(0 \leq i < |t| \implicaLuego \\
+	  noHayRepetidosEnFila(t[i])) \yLuego noHayRepetidosEnColumna(t) \yLuego noHayRepetidosEnRegion(t)\\}	
+	
+\hfill
+
+	\pred{esTableroTotalmenteResuelto}{t: \matriz{\ent}}{
+	esTableroParcialmenteResuelto(t) \wedge (\forall i: \ent) (0 \leq i < |t| \implicaLuego \neg filaTieneCeldaVacia(t[i]))\\}	
 	
 \hfill
 
     \pred{esSubTablero}{t_{0},t_{1} : \matriz{\ent}}{
-    (esTableroValido(t_{0}) \yLuego  esTableroValido(t_{1}) ) \yLuego ( (\forall i: \ent) (\forall j: \ent)\\    
-     (0 \leq i |t| \yLuego t_{0}[i][j] \neq 0 ) \implicaLuego  (t_{0}[i][j] = t_{1}[i][j])\\}	
+    esTableroValido(t_{0}) \wedge  esTableroValido(t_{1})  \wedge  (\forall i: \ent) (\forall j: \ent)\\    
+    ( (0 \leq i |t| \yLuego t_{0}[i][j] \neq 0 ) \implicaLuego  t_{0}[i][j] = t_{1}[i][j])\\}	
 	
-	
-\section{Decisiones tomadas}
+	\aux{cantidadFilas}{t: \matriz{\ent}}{\ent}{|t|}
+    
+\hfill    
+    
+    \aux{cantidadColumnas}{t: \matriz{\ent}}{\ent}{
+    \IfThenElse{cantidadFilas(t)>0}{|t[0]|}{0}} 
 
+\hfill
 
 
 \end{document}
