@@ -46,7 +46,7 @@
 
 \begin{proc}{sudoku\_primeraCeldaVaciaFila}{\In t: \matriz{\ent}, \Out result: \ent}{}{}
     \pre{esTableroValido(t)}
-    \post{\IfThenElse{(\exists i: \ent)(0 \leq i < |t| \yLuego filaTieneCeldaVacia(t[i]) \yLuego (\forall j: \ent)\\    
+    \post{\IfThenElse{(\exists i: \ent)(0 \leq i < |t| \yLuego filaTieneCeldaVacia(t[i]) \wedge (\forall j: \ent)\\    
     (0 \leq j < i \implicaLuego \neg filaTieneCeldaVacia(t[j])))\\}{result = i\\}{result = -1}}
 \end{proc}
 
@@ -54,7 +54,7 @@
 
 \begin{proc}{sudoku\_primeraCeldaVaciaColumna}{\In t: \matriz{\ent}, \Out result: \ent}{}{}
 	\pre{esTableroValido(t)}
-	\post{\IfThenElse{(\exists i: \ent)(0 \leq i < |t| \yLuego filaTieneCeldaVacia(t[i]) \yLuego (\forall j: \ent)(0 \leq j < i \implicaLuego \neg filaTieneCeldaVacia(t[j])))\\}{result = indicePrimeraCeldaVaciaEnFila(t[i])\\}{result = -1}}
+	\post{\IfThenElse{(\exists i: \ent)(0 \leq i < |t| \yLuego filaTieneCeldaVacia(t[i]) \wedge (\forall j: \ent)(0 \leq j < i \implicaLuego \neg filaTieneCeldaVacia(t[j])))\\}{result = indicePrimeraCeldaVaciaEnFila(t[i])\\}{result = -1}}
 	\aux{indicePrimeraCeldaVaciaEnFila}{s: \TLista{\ent}}{\ent}{\IfThenElse{((\exists i: \ent)(0 \leq i < |s| \yLuego s[i] = 0 \yLuego \\ (\forall j: \ent)(0 \leq j < i \implicaLuego s[j] \neq 0)))}{i}{-1}}
 	
 \end{proc}
@@ -69,7 +69,7 @@
 \hfill
 
 \begin{proc}{sudoku\_llenarCelda}{\Inout t: \matriz{\ent}, \In f: \ent, \In c: \ent, \In value: \ent}{}{}
-	\pre{(esTableroValido(t) \wedge 0 \leq f,c \leq 8) \yLuego t[f][c] = 0 \yLuego (1 \leq value \leq 9 \wedge t=t_{0})}
+	\pre{(esTableroValido(t) \wedge 0 \leq f,c \leq 8 \wedge 1 \leq value \leq 9 \wedge t=t_{0}) \yLuego t[f][c] = 0}
 	\post{t[f][c] = value \wedge (\forall i: \ent)(\forall j: \ent)((0\leq i,j < |t| \wedge (i \neq f \vee j \neq c)) \implicaLuego t[i][j]= t_{0}[i][j])}
 
 \end{proc}
@@ -77,7 +77,7 @@
 \hfill
 
 \begin{proc}{sudoku\_vaciarCelda}{\Inout t: \matriz{\ent}, \In f: \ent, \In c: \ent}{}{}
-	\pre{(esTableroValido(t) \wedge 0 \leq f,c \leq 8) \yLuego t[f][c] \neq 0 \wedge t=t_{0}}
+	\pre{(esTableroValido(t) \wedge 0 \leq f,c \leq 8 \wedge t=t_{0}) \yLuego t[f][c] \neq 0}
 	\post{t[f][c] = 0 \wedge (\forall i: \ent)(\forall j: \ent)((0 \leq i,j < |t| \wedge (i \neq f \vee j \neq c)) \implicaLuego t[i][j] = t_{0}[i][j])}
 \end{proc}
 
