@@ -31,7 +31,7 @@
 \hfill
 
 \begin{proc}{sudoku\_esCeldaVacia}{\In t: \matriz{\ent}, \In f: \ent,\In c: \ent, \Out result: \bool}{}{}
-    \pre{esTableroValido(t) \yLuego 0 \leq f,c \leq 8}
+    \pre{esTableroValido(t) \wedge 0 \leq f,c \leq 8}
     \post{result=(t[f][c]=0)}
 \end{proc}
 
@@ -46,7 +46,7 @@
 
 \begin{proc}{sudoku\_primeraCeldaVaciaFila}{\In t: \matriz{\ent}, \Out result: \ent}{}{}
     \pre{esTableroValido(t)}
-    \post{\IfThenElse{(\exists i: \ent)(0 \leq i < |t| \yLuego filaTieneCeldaVacia(t[i]) \yLuego (\forall j: \ent)\\    
+    \post{\IfThenElse{(\exists i: \ent)(0 \leq i < |t| \yLuego filaTieneCeldaVacia(t[i]) \wedge (\forall j: \ent)\\    
     (0 \leq j < i \implicaLuego \neg filaTieneCeldaVacia(t[j])))\\}{result = i\\}{result = -1}}
 \end{proc}
 
@@ -54,7 +54,7 @@
 
 \begin{proc}{sudoku\_primeraCeldaVaciaColumna}{\In t: \matriz{\ent}, \Out result: \ent}{}{}
 	\pre{esTableroValido(t)}
-	\post{\IfThenElse{(\exists i: \ent)(0 \leq i < |t| \yLuego filaTieneCeldaVacia(t[i]) \yLuego (\forall j: \ent)(0 \leq j < i \implicaLuego \neg filaTieneCeldaVacia(t[j])))\\}{result = indicePrimeraCeldaVaciaEnFila(t[i])\\}{result = -1}}
+	\post{\IfThenElse{(\exists i: \ent)(0 \leq i < |t| \yLuego filaTieneCeldaVacia(t[i]) \wedge (\forall j: \ent)(0 \leq j < i \implicaLuego \neg filaTieneCeldaVacia(t[j])))\\}{result = indicePrimeraCeldaVaciaEnFila(t[i])\\}{result = -1}}
 	\aux{indicePrimeraCeldaVaciaEnFila}{s: \TLista{\ent}}{\ent}{\IfThenElse{((\exists i: \ent)(0 \leq i < |s| \yLuego s[i] = 0 \yLuego \\ (\forall j: \ent)(0 \leq j < i \implicaLuego s[j] \neq 0)))}{i}{-1}}
 	
 \end{proc}
@@ -62,23 +62,23 @@
 \hfill
 
 \begin{proc}{sudoku\_valorEnCelda}{\In t: \matriz{\ent}, \In f: \ent, \In c: \ent, \Out result: \ent}{}{}
-	\pre{esTableroValido(t) \yLuego 0 \leq f,c \leq 8 \yLuego t[f][c] \neq 0}
+	\pre{(esTableroValido(t) \wedge 0 \leq f,c \leq 8) \yLuego t[f][c] \neq 0}
 	\post{result = t[f][c]}
 \end{proc}
 
 \hfill
 
 \begin{proc}{sudoku\_llenarCelda}{\Inout t: \matriz{\ent}, \In f: \ent, \In c: \ent, \In value: \ent}{}{}
-	\pre{esTableroValido(t) \yLuego 0 \leq f,c \leq 8 \yLuego t[f][c] = 0 \yLuego 1 \leq value \leq 9 \yLuego t=t_{0}}
-	\post{t[f][c] = value \yLuego (\forall i: \ent)(\forall j: \ent)((0\leq i,j < |t| \yLuego (i \neq f \vee j \neq c)) \implicaLuego t[i][j]= t_{0}[i][j])}
+	\pre{(esTableroValido(t) \wedge 0 \leq f,c \leq 8 \wedge 1 \leq value \leq 9 \wedge t=t_{0}) \yLuego t[f][c] = 0}
+	\post{t[f][c] = value \wedge (\forall i: \ent)(\forall j: \ent)((0\leq i,j < |t| \wedge (i \neq f \vee j \neq c)) \implicaLuego t[i][j]= t_{0}[i][j])}
 
 \end{proc}
 
 \hfill
 
 \begin{proc}{sudoku\_vaciarCelda}{\Inout t: \matriz{\ent}, \In f: \ent, \In c: \ent}{}{}
-	\pre{esTableroValido(t) \yLuego 0 \leq f,c \leq 8 \yLuego t[f][c] \neq 0 \yLuego t=t_{0}}
-	\post{t[f][c] = 0 \yLuego (\forall i: \ent)(\forall j: \ent)((0 \leq i,j < |t| \yLuego (i \neq f \vee j \neq c)) \implicaLuego t[i][j] = t_{0}[i][j])}
+	\pre{(esTableroValido(t) \wedge 0 \leq f,c \leq 8 \wedge t=t_{0}) \yLuego t[f][c] \neq 0}
+	\post{t[f][c] = 0 \wedge (\forall i: \ent)(\forall j: \ent)((0 \leq i,j < |t| \wedge (i \neq f \vee j \neq c)) \implicaLuego t[i][j] = t_{0}[i][j])}
 \end{proc}
 
 \hfill
@@ -107,21 +107,21 @@
 
 \begin{proc}{sudoku\_tieneSolucion}{\In t: \matriz{\ent}, \Out tieneSolucion: \bool}{}{}
 	\pre{esTableroValido(t)}
-	\post{tieneSolucion = (\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \yLuego esSubTablero(s,t))}
+	\post{tieneSolucion = (\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \wedge esSubTablero(s,t))}
 \end{proc}
 
 \hfill
 
 \begin{proc}{sudoku\_resolver}{\Inout t: \matriz{\ent}, \Out tieneSolucion: \bool}{}{}
-	\pre{esTableroValido(t) \yLuego t=t_{0}}
-	\post{\IfThenElse{(\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \yLuego esSubTablero(s,t))\\}{tieneSolucion=\True \wedge t=s\\}{tieneSolucion = \False}}
+	\pre{esTableroValido(t) \wedge t=t_{0}}
+	\post{\IfThenElse{(\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \wedge esSubTablero(s,t))\\}{tieneSolucion=\True \wedge t=s\\}{tieneSolucion = \False}}
 \end{proc}
 
 \hfill
 
 \begin{proc}{sudoku\_copiarTablero}{\In src: \matriz{\ent}, \Out target: \matriz{\ent}}{}{}
 	\pre{esTableroValido(src)}
-	\post{esTableroValido(target) \yLuego (\forall i: \ent)(\forall j: \ent)(0 \leq i,j < |src| \implicaLuego target[i][j] = src[i][j])}
+	\post{esTableroValido(target) \wedge (\forall i: \ent)(\forall j: \ent)(0 \leq i,j < |src| \implicaLuego target[i][j] = src[i][j])}
 \end{proc}
    
 
@@ -138,7 +138,7 @@
 \hfill
 
     \pred{esTableroValido}{t: \matriz{\ent}}{   
-        esMatrizCuadrada(t) \yLuego |t|=9 \yLuego\\
+        esMatrizCuadrada(t) \wedge |t|=9 \wedge\\
     (\forall i: \ent)(\forall j: \ent)( 0\leq i,j <|t| \implicaLuego 0 \leq t[i][j] \leq 9)\\}
 
 
@@ -159,6 +159,8 @@
 	(\forall i: \ent)(\forall j: \ent)((0 \leq i,j < |s| \wedge i \neq j) \implicaLuego (s[i] = 0 \vee s[j] = 0 \vee s[i] \neq s[j]))\\}
 	
 \hfill
+\\
+\\
 
 	\pred{noHayRepetidosEnColumna}{t: \matriz{\ent}}{
 	(\forall j: \ent)(0 \leq j < |t| \implicaLuego (\forall l: \ent)(\forall k: \ent)\\
@@ -168,7 +170,7 @@
 
 	\pred{esTableroParcialmenteResuelto}{t: \matriz{\ent}}{
 	esTableroValido(t) \wedge (\forall i: \ent)(0 \leq i < |t| \implicaLuego \\
-	  noHayRepetidosEnFila(t[i])) \yLuego noHayRepetidosEnColumna(t) \yLuego noHayRepetidosEnRegion(t)\\}	
+	  noHayRepetidosEnFila(t[i])) \wedge noHayRepetidosEnColumna(t) \wedge noHayRepetidosEnRegion(t)\\}	
 	
 \hfill
 
