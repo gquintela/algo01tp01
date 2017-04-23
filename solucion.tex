@@ -55,7 +55,7 @@
 \begin{proc}{sudoku\_primeraCeldaVaciaColumna}{\In t: \matriz{\ent}, \Out result: \ent}{}{}
 	\pre{esTableroValido(t)}
 	\post{\IfThenElse{(\exists i: \ent)(0 \leq i < |t| \yLuego filaTieneCeldaVacia(t[i]) \wedge (\forall j: \ent)(0 \leq j < i \implicaLuego \neg filaTieneCeldaVacia(t[j])))\\}{result = indicePrimeraCeldaVaciaEnFila(t[i])\\}{result = -1}}
-	\aux{indicePrimeraCeldaVaciaEnFila}{s: \TLista{\ent}}{\ent}{\IfThenElse{((\exists i: \ent)(0 \leq i < |s| \yLuego s[i] = 0 \yLuego \\ (\forall j: \ent)(0 \leq j < i \implicaLuego s[j] \neq 0)))}{i}{-1}}
+	\aux{indicePrimeraCeldaVaciaEnFila}{s: \TLista{\ent}}{\ent}{\IfThenElse{((\exists i: \ent)(0 \leq i < |s| \yLuego s[i] = 0 \wedge \\ (\forall j: \ent)(0 \leq j < i \implicaLuego s[j] \neq 0)))}{i}{-1}}
 	
 \end{proc}
 
@@ -114,7 +114,7 @@
 
 \begin{proc}{sudoku\_resolver}{\Inout t: \matriz{\ent}, \Out tieneSolucion: \bool}{}{}
 	\pre{esTableroValido(t) \wedge t=t_{0}}
-	\post{\IfThenElse{(\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \wedge esSubTablero(s,t))\\}{tieneSolucion=\True \wedge t=s\\}{tieneSolucion = \False}}
+	\post{\IfThenElse{(\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \wedge esSubTablero(s,t))\\}{  tieneSolucion=\True \wedge t=s\\}{t=t_{0} \wedge ( tieneSolucion = \False )}}
 \end{proc}
 
 \hfill
@@ -182,6 +182,8 @@
     \pred{esSubTablero}{t_{0},t_{1} : \matriz{\ent}}{
     esTableroValido(t_{0}) \wedge  esTableroValido(t_{1})  \wedge  (\forall i: \ent) (\forall j: \ent)\\    
     ( (0 \leq i,j< |t| \yLuego t_{0}[i][j] \neq 0 ) \implicaLuego  t_{0}[i][j] = t_{1}[i][j])\\}	
+
+\hfill  
 	
 	\aux{cantidadFilas}{t: \matriz{\ent}}{\ent}{|t|}
     
