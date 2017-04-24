@@ -92,14 +92,14 @@
 \\
 
 \begin{proc}{sudoku\_esTableroTotalmenteResuelto}{\In t: \matriz{\ent}, \Out result: \bool}{}{}
-    \pre{\True}
+    \pre{esTableroValido(t)}
     \post{result = esTableroTotalmenteResuelto(t)}
     \end{proc}
     
     \hfill
 
 \begin{proc}{sudoku\_esSubTablero}{\In t_{0},t_{1}: \matriz{\ent}, \Out result: \bool}{}{}
-    \pre{\True}
+    \pre{esTableroValido(t_{0}) \wedge esTableroValido(t_{1})}
     \post{result = esSubTablero(t_{0},t_{1})}
     \end{proc}
     
