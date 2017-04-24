@@ -70,7 +70,7 @@
 
 \begin{proc}{sudoku\_llenarCelda}{\Inout t: \matriz{\ent}, \In f: \ent, \In c: \ent, \In value: \ent}{}{}
 	\pre{(esTableroValido(t) \wedge 0 \leq f,c \leq 8 \wedge 1 \leq value \leq 9 \wedge t=t_{0}) \yLuego t[f][c] = 0}
-	\post{esTableroValido(t) \wedge t[f][c] = value \wedge (\forall i: \ent)(\forall j: \ent)((0\leq i,j < |t| \wedge (i \neq f \vee j \neq c)) \implicaLuego t[i][j]= t_{0}[i][j])}
+	\post{esTableroValido(t) \yLuego t[f][c] = value \wedge (\forall i: \ent)(\forall j: \ent)((0\leq i,j < |t| \wedge (i \neq f \vee j \neq c)) \implicaLuego t[i][j]= t_{0}[i][j])}
 
 \end{proc}
 
@@ -78,7 +78,7 @@
 
 \begin{proc}{sudoku\_vaciarCelda}{\Inout t: \matriz{\ent}, \In f: \ent, \In c: \ent}{}{}
 	\pre{(esTableroValido(t) \wedge 0 \leq f,c \leq 8 \wedge t=t_{0}) \yLuego t[f][c] \neq 0}
-	\post{esTableroValido(t) \wedge t[f][c] = 0 \wedge (\forall i: \ent)(\forall j: \ent)((0 \leq i,j < |t| \wedge (i \neq f \vee j \neq c)) \implicaLuego t[i][j] = t_{0}[i][j])}
+	\post{esTableroValido(t) \yLuego t[f][c] = 0 \wedge (\forall i: \ent)(\forall j: \ent)((0 \leq i,j < |t| \wedge (i \neq f \vee j \neq c)) \implicaLuego t[i][j] = t_{0}[i][j])}
 \end{proc}
 
 \hfill
