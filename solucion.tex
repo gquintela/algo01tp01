@@ -46,7 +46,7 @@
 
 \begin{proc}{sudoku\_primeraCeldaVaciaFila}{\In t: \matriz{\ent}, \Out result: \ent}{}{}
 	\pre{esTableroValido(t)}
-	\post{(\exists i: \ent)(esPrimeraFilaConCeldaVacia(t, i) \wedge result = i) \vee \\ (\neg(\exists i: \ent)(0 \leq i < |t| \yLuego filaTieneCeldaVacia(t[i])) \wedge result = -1)}
+	\post{esPrimeraFilaConCeldaVacia(t, result) \vee \\ (\neg(\exists i: \ent)(0 \leq i < |t| \yLuego filaTieneCeldaVacia(t[i])) \wedge result = -1)}
 
 \end{proc}
 
@@ -54,7 +54,7 @@
 
 \begin{proc}{sudoku\_primeraCeldaVaciaColumna}{\In t: \matriz{\ent}, \Out result: \ent}{}{}
 	\pre{esTableroValido(t)}
-	\post{(\exists i: \ent)(esPrimeraFilaConCeldaVacia(t, i) \wedge \\ (\exists k: \ent)(esPrimeraCeldaVaciaEnFila(t[i], k) \wedge result = k)) \vee \\(\neg(\exists i: \ent)(0 \leq i < 
+	\post{(\exists i: \ent)(esPrimeraFilaConCeldaVacia(t, i) \wedge \\ esPrimeraCeldaVaciaEnFila(t[i], result)) \vee \\(\neg(\exists i: \ent)(0 \leq i < 
 |t| \yLuego filaTieneCeldaVacia(t[i])) \wedge result = -1)}
 	\pred{esPrimeraCeldaVaciaEnFila}{s: \TLista{\ent}, k: \ent}{s[k] = 0 \wedge (\forall i: \ent)(0 \leq i < k \implicaLuego s[i] \neq 0)}
 \end{proc}
