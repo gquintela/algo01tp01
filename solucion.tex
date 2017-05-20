@@ -39,25 +39,27 @@
 
 \begin{proc}{sudoku\_nroDeCeldasVacias}{\In t: \matriz{\ent}, \Out result: \ent}{}{}
     \pre{esTableroValido(t)}
-    \post{\sum_{i=0}^{|t|-1} (\sum_{j=0}^{|t|-1} \IfThenElse{t[i][j] = 0 }{1}{0})}
+    \post{result = \sum_{i=0}^{|t|-1} (\sum_{j=0}^{|t|-1} \IfThenElse{t[i][j] = 0 }{1}{0})}
 \end{proc}
 
 \hfill
 
 \begin{proc}{sudoku\_primeraCeldaVaciaFila}{\In t: \matriz{\ent}, \Out result: \ent}{}{}
-    \pre{esTableroValido(t)}
-    \post{\IfThenElse{(\exists i: \ent)(0 \leq i < |t| \yLuego filaTieneCeldaVacia(t[i]) \wedge (\forall j: \ent)\\    
-    (0 \leq j < i \implicaLuego \neg filaTieneCeldaVacia(t[j])))\\}{result = i\\}{result = -1}}
+	\pre{esTableroValido(t)}
+	\post{(\exists i: \ent)(esPrimeraFilaConCeldaVacia(t, i) \wedge result = i) \vee \\ (\neg(\exists i: \ent)(0 \leq i < |t| \yLuego filaTieneCeldaVacia(t[i])) \wedge result = -1)}
+
 \end{proc}
 
 \hfill
 
 \begin{proc}{sudoku\_primeraCeldaVaciaColumna}{\In t: \matriz{\ent}, \Out result: \ent}{}{}
 	\pre{esTableroValido(t)}
-	\post{\IfThenElse{(\exists i: \ent)(0 \leq i < |t| \yLuego filaTieneCeldaVacia(t[i]) \wedge (\forall j: \ent)(0 \leq j < i \implicaLuego \neg filaTieneCeldaVacia(t[j])))\\}{result = indicePrimeraCeldaVaciaEnFila(t[i])\\}{result = -1}}
-	\aux{indicePrimeraCeldaVaciaEnFila}{s: \TLista{\ent}}{\ent}{\IfThenElse{((\exists i: \ent)(0 \leq i < |s| \yLuego s[i] = 0 \wedge \\ (\forall j: \ent)(0 \leq j < i \implicaLuego s[j] \neq 0)))}{i}{-1}}
-	
+	\post{(\exists i: \ent)(esPrimeraFilaConCeldaVacia(t, i) \wedge \\ (\exists k: \ent)(esPrimeraCeldaVaciaEnFila(t[i], k) \wedge result = k)) \vee \\(\neg(\exists i: \ent)(0 \leq i < 
+|t| \yLuego filaTieneCeldaVacia(t[i])) \wedge result = -1)}
+	\pred{esPrimeraCeldaVaciaEnFila}{s: \TLista{\ent}, k: \ent}{s[k] = 0 \wedge (\forall i: \ent)(0 \leq i < k \implicaLuego s[i] \neq 0)}
 \end{proc}
+
+
 
 \hfill
 
@@ -107,22 +109,26 @@
 
 \begin{proc}{sudoku\_tieneSolucion}{\In t: \matriz{\ent}, \Out tieneSolucion: \bool}{}{}
 	\pre{esTableroValido(t)}
-	\post{tieneSolucion = (\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \wedge esSubTablero(s,t))}
+	\post{tieneSolucion = (\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \wedge esSubTablero(t,s))}
 \end{proc}
 
 \hfill
 
 \begin{proc}{sudoku\_resolver}{\Inout t: \matriz{\ent}, \Out tieneSolucion: \bool}{}{}
 	\pre{esTableroValido(t) \wedge t=t_{0}}
-	\post{\IfThenElse{(\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \wedge esSubTablero(s,t))\\}{  tieneSolucion=\True \wedge t=s\\}{t=t_{0} \wedge ( tieneSolucion = \False )}}
+	\post{( (\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \wedge esSubTablero(t,s) \\ \wedge (tieneSolucion=\True ) \wedge (t=s) ) \vee  ( \neg (\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \wedge \\ esSubTablero(t,s) ) \wedge (tieneSolucion=\False ) \wedge (t=t_{0}) )}
 \end{proc}
-
 \hfill
 
 \begin{proc}{sudoku\_copiarTablero}{\In src: \matriz{\ent}, \Out target: \matriz{\ent}}{}{}
 	\pre{esTableroValido(src)}
 	\post{esTableroValido(target) \wedge (\forall i: \ent)(\forall j: \ent)(0 \leq i,j < |src| \implicaLuego target[i][j] = src[i][j])}
 \end{proc}
+
+\hfill
+
+
+
    
 
 \section{Predicados y Auxiliares generales}
@@ -138,16 +144,21 @@
 \hfill
 
     \pred{esTableroValido}{t: \matriz{\ent}}{   
-        esMatrizCuadrada(t) \wedge |t|=9 \wedge\\
+        esMatrizCuadrada(t) \yLuego |t|=9 \wedge\\
     (\forall i: \ent)(\forall j: \ent)( 0\leq i,j <|t| \implicaLuego 0 \leq t[i][j] \leq 9)\\}
 
 
 \hfill
 
 	\pred{filaTieneCeldaVacia}{f: \TLista{\ent}}{\\ 
-	(\exists i: \ent)(0 \leq i < |f| \yLuego f[i] = 0)\\}
+	(\exists i: \ent)(0 \leq i < |f| \yLuego f[i] = 0)\\ }
+	
+\hfill
 
-\hfill	
+	\pred{esPrimeraFilaConCeldaVacia}{t: \matriz{\ent}, i: \ent}{0 \leq i < |t| \yLuego filaTieneCeldaVacia(t[i]) \wedge \\ (\forall j: \ent)(0 \leq j < i \implicaLuego \neg filaTieneCeldaVacia(t[j]))
+	}	
+	
+	\hfill
 
 	\pred{noHayRepetidosEnRegion}{t: \matriz{\ent}}{
 	(\forall i: \ent)(\forall j: \ent)(\forall k: \ent)(\forall l: \ent)\\
@@ -180,7 +191,7 @@
 \hfill
 
     \pred{esSubTablero}{t_{0},t_{1} : \matriz{\ent}}{
-    esTableroValido(t_{0}) \wedge  esTableroValido(t_{1})  \wedge  (\forall i: \ent) (\forall j: \ent)\\    
+      (\forall i: \ent) (\forall j: \ent)\\    
     ( (0 \leq i,j< |t| \yLuego t_{0}[i][j] \neq 0 ) \implicaLuego  t_{0}[i][j] = t_{1}[i][j])\\}	
 
 \hfill  
