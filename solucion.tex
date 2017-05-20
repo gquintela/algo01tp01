@@ -56,7 +56,7 @@
 	\pre{esTableroValido(t)}
 	\post{(\exists i: \ent)(esPrimeraFilaConCeldaVacia(t, i) \wedge \\ esPrimeraCeldaVaciaEnFila(t[i], result)) \vee \\(\neg(\exists i: \ent)(0 \leq i < 
 |t| \yLuego filaTieneCeldaVacia(t[i])) \wedge result = -1)}
-	\pred{esPrimeraCeldaVaciaEnFila}{s: \TLista{\ent}, k: \ent}{s[k] = 0 \wedge (\forall i: \ent)(0 \leq i < k \implicaLuego s[i] \neq 0)}
+	\pred{esPrimeraCeldaVaciaEnFila}{s: \TLista{\ent}, k: \ent}{0 \leq k < |t| \yLuego s[k] = 0 \wedge (\forall i: \ent)(0 \leq i < k \implicaLuego s[i] \neq 0)}
 \end{proc}
 
 
@@ -94,14 +94,14 @@
 \\
 
 \begin{proc}{sudoku\_esTableroTotalmenteResuelto}{\In t: \matriz{\ent}, \Out result: \bool}{}{}
-    \pre{\True}
+    \pre{esTableroValido(t)}
     \post{result = esTableroTotalmenteResuelto(t)}
     \end{proc}
     
     \hfill
 
 \begin{proc}{sudoku\_esSubTablero}{\In t_{0},t_{1}: \matriz{\ent}, \Out result: \bool}{}{}
-    \pre{\True}
+    \pre{esTableroValido(t_{0}) \wedge esTableroValido(t_{1})}
     \post{result = esSubTablero(t_{0},t_{1})}
     \end{proc}
     
@@ -116,7 +116,7 @@
 
 \begin{proc}{sudoku\_resolver}{\Inout t: \matriz{\ent}, \Out tieneSolucion: \bool}{}{}
 	\pre{esTableroValido(t) \wedge t=t_{0}}
-	\post{( (\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \wedge esSubTablero(t,s) \\ \wedge (tieneSolucion=\True ) \wedge (t=s) ) \vee  ( \neg (\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \wedge \\ esSubTablero(t,s) ) \wedge (tieneSolucion=\False ) \wedge (t=t_{0}) )}
+	\post{(\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \wedge esSubTablero(t,s) \\ \wedge (tieneSolucion=\True ) \wedge (t=s) ) \vee  ( \neg (\exists s: \matriz{\ent})(esTableroTotalmenteResuelto(s) \wedge \\ esSubTablero(t,s) ) \wedge (tieneSolucion=\False ) \wedge (t=t_{0}) )}
 \end{proc}
 \hfill
 
